@@ -330,7 +330,7 @@
                 <option value="">분야 선택</option>
 				 <c:forEach items="${commonCode}" var="code">
 					<c:if test="${code.master_id == 'M000002'}">
-						<option value="${code.detail_id}">${code.name}</option>
+						<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>
 					</c:if>
 				 </c:forEach>
               </select>

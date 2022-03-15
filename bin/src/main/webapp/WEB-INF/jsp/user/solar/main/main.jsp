@@ -1,3 +1,4 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <div id="wrap">
     <div class="main_top_info">
 	<img src="/assets/img/main_img.png" alt="태양산업 일자리 내비게이터 메인 소개 이미지" />

@@ -1198,6 +1198,7 @@
         try {
           delete object[key];
         } catch (e) {// something got wrong
+        	e.printStackTrace();
         }
       });
     }
@@ -1330,6 +1331,7 @@
             });
             window.addEventListener('testPassiveListener', null, opts);
           } catch (e) {// No support
+          	
           }
   
           return supportsPassive;
@@ -8001,7 +8003,8 @@
         }
   
         var randomChar = function randomChar() {
-          return Math.round(16 * Math.random()).toString(16);
+         // return Math.round(16 * Math.random()).toString(16);
+         return Math.round(16 * window.crypto.getRandomValues()).toString(16);
         };
   
         return 'x'.repeat(size).replace(/x/g, randomChar);

@@ -53,7 +53,7 @@
 </script>
 
  
-<input type="hidden" id="trend_id" name="trend_id" value="${vo.trend_id}" />
+<input type="hidden" id="trend_id" name="trend_id" value='<c:out value="${vo.trend_id}"/>' />
 <body>
   <div id="wrap">
     <header class="sub">

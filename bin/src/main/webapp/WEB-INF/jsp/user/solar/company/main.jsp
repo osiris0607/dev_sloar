@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <script type='text/javascript'>
 	var companyList;
@@ -441,9 +442,9 @@
 			categoryDetail.empty();
 			str += '<option value="">생태계 세부</option>';
 			<c:forEach items="${commonCode}" var="code">
-				<c:if test="${code.master_id == 'M000003'}">
-					if (categoryId == "${code.parent_id}") {
-						str += '<option value="${code.detail_id}">${code.name}</option>';
+				<c:if test="${fn:escapeXml(code.master_id) == 'M000003'}">
+					if (categoryId == "${fn:escapeXml(code.parent_id)}") {
+						str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 					}
 				</c:if>
 			</c:forEach>
@@ -456,7 +457,7 @@
 			str += '<option value="">생태계 분류</option>';
 			<c:forEach items="${commonCode}" var="code">
 				<c:if test="${code.master_id == 'M000002'}">
-					str += '<option value="${code.detail_id}">${code.name}</option>';
+					str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 				</c:if>
 			</c:forEach>	
 			category.append(str);
@@ -478,7 +479,7 @@
 		str += '<option value="">생태계 분류</option>';
 		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000002'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>	
 		category.append(str);
@@ -530,7 +531,6 @@
           <li><img src="/assets/img/btn/breadcrumb_home.png" alt="홈"></li>
           <li>태양광산업 기업 지도</li>
         </ul>
-
         <fieldset>
           <legend><span>조건검색</span></legend>
           <ul class="searchWrap inMap">

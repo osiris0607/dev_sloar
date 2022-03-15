@@ -40,7 +40,7 @@
 </script>
 
 <body class="">
-	<input type="hidden" id="kakao_redirect_url" name="kakao_redirect_url" value="${vo.kakao_redirect_url}" />
+	<input type="hidden" id="kakao_redirect_url" name="kakao_redirect_url" value='<c:out value="${vo.kakao_redirect_url}"/>' />
 	<div class="container--sub login">
 		<!-- mark: content -->
 		<div id="cont">

@@ -163,7 +163,7 @@
 </script>
 
 
-<input type="hidden" id="job_id" name="job_id" value="${vo.job_id}" />
+<input type="hidden" id="job_id" name="job_id" value='<c:out value="${vo.job_id}"/>' />
 <div id="wrap">
     <section>
       <div class="subVisual search">
