@@ -10,7 +10,6 @@
 
 		let today = new Date();   
 		$("#reg_date").text(today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate());
-		/* $("#writer").val("${user_id}"); */
 		
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,

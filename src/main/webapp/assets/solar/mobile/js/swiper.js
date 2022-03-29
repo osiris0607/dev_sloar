@@ -1198,7 +1198,6 @@
         try {
           delete object[key];
         } catch (e) {// something got wrong
-        	e.printStackTrace();
         }
       });
     }
