@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <sec:authentication property="principal.username" var="member_id" />
 <script type="text/javascript" src="${ctx }/assets/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
   
 <script type='text/javascript'>
 	var oEditors = [];
@@ -69,7 +69,7 @@
 		formData.append("trend_id", $("#trend_id").val());
 		formData.append("title", $("#title").val());
 		if ( $("#writer").val() == null || $("#writer").val() == "" ) {
-			formData.append("writer",'${member_id}');
+			formData.append("writer",'${fn:escapeXml(member_id)}');
 		}
 		else {
 			formData.append("writer",$("#writer").val());
@@ -134,7 +134,7 @@
 </script>
   
 <!--페이지 루트-->
-<input type="hidden" id="trend_id" name="trend_id" value="${vo.trend_id}" />
+<input type="hidden" id="trend_id" name="trend_id" value='<c:out value="${vo.trend_id}"/>' />
 <div class="page-nation container">
     <a href="/admin/rdt/home/management"><i class="nav-icon fa fa-home mr5"></i>홈화면</a><span class="route_icon"></span>
     <a href="/admin/rdt/notification/trend/searchList">알림/정보</a><span class="route_icon"></span>

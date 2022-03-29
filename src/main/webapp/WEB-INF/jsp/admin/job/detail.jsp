@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
   
 <script type='text/javascript'>
 	var companyList = new Array(); 
@@ -98,11 +98,11 @@
 		str += "<option value=''>생태계 분류 전체</option>"
         <c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000002'}">
-				if (jobDetailObject.category_id == "${code.detail_id}") {
-					str += "<option value='${code.detail_id}' selected>${code.name}</option>"
+				if (jobDetailObject.category_id == "${fn:escapeXml(code.detail_id)}") {
+					str += "<option value='${code.detail_id}' selected><c:out value="${code.name}"></c:out></option>"
 				}
 				else {
-					str += "<option value='${code.detail_id}'>${code.name}</option>"
+					str += "<option value='${code.detail_id}'><c:out value="${code.name}"></c:out></option>"
 				}
 			</c:if>
 		</c:forEach>
@@ -112,11 +112,11 @@
 		str = "";
         <c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000003'}">
-				if (jobDetailObject.category_detail_id == "${code.detail_id}" && jobDetailObject.category_id == "${code.parent_id}") {
+				if (jobDetailObject.category_detail_id == "${fn:escapeXml(code.detail_id)}" && jobDetailObject.category_id == "${fn:escapeXml(code.parent_id)}") {
 					str += "<option value='${code.detail_id}' selected>${code.name}</option>"
 				}
-				else if (jobDetailObject.category_id == "${code.parent_id}") {
-					str += "<option value='${code.detail_id}'>${code.name}</option>"
+				else if (jobDetailObject.category_id == "${fn:escapeXml(code.parent_id)}") {
+					str += "<option value='${code.detail_id}'><c:out value="${code.name}"></c:out></option>"
 				}
 			</c:if>
 		</c:forEach>
@@ -126,7 +126,7 @@
 		str = "";
         <c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000004'}">
-				if (jobDetailObject.occupation == "${code.detail_id}") {
+				if (jobDetailObject.occupation == "${fn:escapeXml(code.detail_id)}") {
 					str += "<option value='${code.detail_id}' selected>${code.name}</option>"
 				}
 				else {
@@ -432,7 +432,7 @@
 		str += '<option value="">--선택--</option>';
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				str += '<option value="' +index + '">${code.name}</option>';
+				str += '<option value="' +index + '"><c:out value="${code.name}"></c:out></option>';
 				index++;
 			</c:if>
 		</c:forEach>
@@ -447,7 +447,7 @@
 		// License Category 별로 License Selector를 만든다.
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				var licenseId = "${code.detail_id}";
+				var licenseId = "${fn:escapeXml(code.detail_id)}";
 
 				str += '<ul>';
 				// category 에 해당하는 License를 찾는다.
@@ -494,15 +494,15 @@
 
 				var isChecked = false;
 				$.each(jobDetailObject.return_major_list, function(key, value) {
-					if (value.detail_id == "${code.detail_id}" ) {
-						str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${code.detail_id}" text="${code.name}" checked>';
+					if (value.detail_id == "${fn:escapeXml(code.detail_id)}" ) {
+						str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${fn:escapeXml(code.detail_id)}" text="${fn:escapeXml(code.name)}" checked>';
 						isChecked = true;
 					}
 				});
 				if (isChecked == false){
-					str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${code.detail_id}" text="${code.name}">';
+					str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${fn:escapeXml(code.detail_id)}" text="${fn:escapeXml(code.name)}">';
 				}
-				str += '		<label class="form-check-label" for="">${code.name}</label>';
+				str += '		<label class="form-check-label" for=""><c:out value="${code.name}"></c:out></label>';
 				str += '	</div>';
 				str += '</li>';
 			</c:if>
@@ -520,16 +520,16 @@
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000012'}">
 
-				if (jobDetailObject.difficulty == "${code.detail_id}") {
+				if (jobDetailObject.difficulty == "${fn:escapeXml(code.detail_id)}") {
 					str += '<div class="form-check form-check-inline">';
-					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${code.detail_id}" checked>';
-					str += '		<label class="form-check-label" for="">${code.name}</label>';
+					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${fn:escapeXml(code.detail_id)}" checked>';
+					str += '		<label class="form-check-label" for=""><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 				}
 				else {
 					str += '<div class="form-check form-check-inline">';
-					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${code.detail_id}" >';
-					str += '		<label class="form-check-label" for="">${code.name}</label>';
+					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${fn:escapeXml(code.detail_id)}" >';
+					str += '		<label class="form-check-label" for=""><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 
 				}
@@ -545,10 +545,10 @@
 		education.empty();
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000005'}">
-				if (jobDetailObject.education == "${code.detail_id}") {
+				if (jobDetailObject.education == "${fn:escapeXml(code.detail_id)}") {
 					str += '<div class="form-check form-check-inline">';
-					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${code.detail_id}" checked>';
-					str += '	<label class="form-check-label">${code.name}</label>';
+					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${fn:escapeXml(code.detail_id)}" checked>';
+					str += '	<label class="form-check-label"><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 				}
 				else {

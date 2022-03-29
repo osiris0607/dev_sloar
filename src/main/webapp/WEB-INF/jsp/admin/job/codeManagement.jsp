@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
   
 <script type='text/javascript'>
 
@@ -349,7 +349,7 @@
 
 		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>
 		selector.append(str); 
@@ -502,8 +502,8 @@
 			str += '	<option value="">생태계 세부분류 전체</option>';
     		<c:forEach items="${commonCode}" var="code">
 				<c:if test="${code.master_id == 'M000003'}">
-					if (categoryId == "${code.parent_id}") {
-						str += '<option value="${code.detail_id}">${code.name}</option>';
+					if (categoryId == "${fn:escapeXml(code.parent_id)}") {
+						str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 					}
 				</c:if>
 			</c:forEach>
@@ -541,13 +541,13 @@
 	function commonCodeInit(){
 		<c:forEach items="${commonCode}" var="code">
 			commonCodeArr.push({
-				master_id:"${code.master_id}",
-				master_description:"${code.master_description}",
-				parent_id:"${code.parent_id}",
-				detail_id:"${code.detail_id}",
-				name:"${code.name}",
-				detail_description:"${code.detail_description}",
-				use_yn:"${code.use_yn}"
+				master_id:"${fn:escapeXml(code.master_id)}",
+				master_description:"${fn:escapeXml(code.master_description)}",
+				parent_id:"${fn:escapeXml(code.parent_id)}",
+				detail_id:"${fn:escapeXml(code.detail_id)}",
+				name:"${fn:escapeXml(code.name)}",
+				detail_description:"${fn:escapeXml(code.detail_description)}",
+				use_yn:"${fn:escapeXml(code.use_yn)}"
 			});
 		</c:forEach>
 	}
@@ -946,7 +946,7 @@
 </div>
 <!--본문시작-->
 <div class="sub-container container">
-	<input type="hidden" id="common_code" name="common_code" value="${commonCode}" />
+	<input type="hidden" id="common_code" name="common_code" value='<c:out value="${commonCode}"/>' />
 	<div class="sub-content">
 	<!--페이지 타이틀-->				
 		<div class="page-header">
@@ -997,7 +997,7 @@
                                	<option value="">생태계 분류 전체</option>
                         		<c:forEach items="${commonCode}" var="code">
 									<c:if test="${code.master_id == 'M000002'}">
-										<option value="${code.detail_id}">${code.name}</option>
+										<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>
 									</c:if>
 								</c:forEach>
                             </select>
@@ -1033,7 +1033,7 @@
 	                               	<option value="">생태계 분류 전체</option>
 	                        		<c:forEach items="${commonCode}" var="code">
 										<c:if test="${code.master_id == 'M000002'}">
-											<option value="${code.detail_id}">${code.name}</option>
+											<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>
 										</c:if>
 									</c:forEach>
 	                            </select>

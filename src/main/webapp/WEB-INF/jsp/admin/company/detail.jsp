@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
   
 <script type='text/javascript'>
 
@@ -71,16 +71,16 @@
 		size.empty();
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000014'}">
-				if ( companyDetailObject.size == "${code.detail_id}") {
+				if ( companyDetailObject.size == "${fn:escapeXml(code.detail_id)}") {
 					str += '<div class="form-check form-check-inline">';
-					str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${code.detail_id}" checked/>';
-					str += '		<label class="form-check-label" >${code.name}</label>';
+					str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${fn:escapeXml(code.detail_id)}" checked/>';
+					str += '		<label class="form-check-label" ><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 				}
 				else {
 					str += '<div class="form-check form-check-inline">';
-					str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${code.detail_id}"/>';
-					str += '		<label class="form-check-label" >${code.name}</label>';
+					str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${fn:escapeXml(code.detail_id)}"/>';
+					str += '		<label class="form-check-label" ><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 				}
 			</c:if>
@@ -124,11 +124,11 @@
 		str += '<option value="">표준산업분류</option>';
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000015'}">
-				if (companyDetailObject.ksic == "${code.detail_id}") {
-					str += '<option value="${code.detail_id}" selected>${code.name}</option>';
+				if (companyDetailObject.ksic == "${fn:escapeXml(code.detail_id)}") {
+					str += '<option value="${code.detail_id}" selected><c:out value="${code.name}"></c:out></option>';
 				}
 				else {
-					str += '<option value="${code.detail_id}">${code.name}</option>';
+					str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 				}
 			</c:if>
 		</c:forEach>
@@ -223,7 +223,7 @@
 		str += '<option value="">표준산업분류</option>';
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000015'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>
 		industryCategory.append(str);
@@ -419,7 +419,7 @@
 </script>
   
 <!--페이지 루트-->
-<input type="hidden" id="company_id" name="company_id" value="${vo.company_id}" />
+<input type="hidden" id="company_id" name="company_id" value='<c:out value="${vo.company_id}"/>' />
 <div class="page-nation container">
     <a  href="./html/index.html"><i class="nav-icon fa fa-home mr5"></i>홈화면</a><span class="route_icon"></span>
     <a href="/admin/rdt/company/searchList">기업 관리</a><span class="route_icon"></span>

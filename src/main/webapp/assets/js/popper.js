@@ -467,8 +467,6 @@ function getBoundingClientRect(element) {
       rect = element.getBoundingClientRect();
     }
   } catch (e) {
-	e.printStackTrace();
-	rect = {};
   }
 
   var result = {

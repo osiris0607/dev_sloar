@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
   
 <script type='text/javascript'>
 
@@ -26,11 +26,11 @@
 		str += "<option value=''>분류 선택</option>"
         <c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				if (data.result.field == "${code.detail_id}") {
-					str += "<option value='${code.detail_id}' selected>${code.name}</option>"
+				if (data.result.field == "${fn:escapeXml(code.detail_id)}") {
+					str += "<option value='${code.detail_id}' selected><c:out value="${code.name}"></c:out></option>"
 				}
 				else {
-					str += "<option value='${code.detail_id}'>${code.name}</option>"
+					str += "<option value='${code.detail_id}'><c:out value="${code.name}"></c:out></option>"
 				}
 			</c:if>
 		</c:forEach>
@@ -125,7 +125,7 @@
 </script>
   
 <!--페이지 루트-->
-<input type="hidden" id="license_id" name="license_id" value="${vo.license_id}" />
+<input type="hidden" id="license_id" name="license_id" value='<c:out value="${vo.license_id}"/>' />
 <div class="page-nation container">
     <a  href="./html/index.html"><i class="nav-icon fa fa-home mr5"></i>홈화면</a><span class="route_icon"></span>
     <a href="./html/industry-trend.html">알림/정보</a><span class="route_icon"></span>
