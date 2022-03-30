@@ -553,7 +553,7 @@
 				}
 				else {
 					str += '<div class="form-check form-check-inline">';
-					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${code.detail_id}" >';
+					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${fn:escapeXml(code.detail_id)}" >';
 					str += '	<label class="form-check-label">${code.name}</label>';
 					str += '</div>';
 				}
