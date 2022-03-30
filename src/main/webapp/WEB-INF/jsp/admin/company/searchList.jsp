@@ -41,7 +41,7 @@
 		// License Category 별로 License Selector를 만든다.
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000014'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>
 		size.append(str);

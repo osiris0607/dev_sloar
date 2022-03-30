@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <sec:authentication property="principal.username" var="user_id" />
 <script type="text/javascript" src="${ctx }/assets/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
 
 <script type='text/javascript'>
 	var oEditors = [];
 
 	$(document).ready(function() {
-		$("#writer").val("${user_id}");
+		$("#writer").val("${fn:escapeXml(user_id)}");
 		
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,

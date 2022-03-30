@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <script type="text/javascript" src="${ctx }/assets/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id" />
 </sec:authorize>
@@ -55,7 +55,7 @@
 		comAjax.setCallback("getFaqDetailCB");
 		comAjax.addParam("faq_id", $("#faq_id").val());
 		<sec:authorize access="isAuthenticated()">
-			comAjax.addParam("member_id", '${user_id}');
+			comAjax.addParam("member_id", '${fn:escapeXml(user_id)}');
 		</sec:authorize>
 		
 		comAjax.ajax();

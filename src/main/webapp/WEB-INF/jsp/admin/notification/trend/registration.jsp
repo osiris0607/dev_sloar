@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <sec:authentication property="principal.username" var="member_id" />
 <script type="text/javascript" src="${ctx }/assets/SE2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
   
 <script type='text/javascript'>
 	var oEditors = [];
@@ -48,7 +48,7 @@
 		
 		formData.append("title", $("#title").val());
 		if ( $("#writer").val() == null || $("#writer").val() == "" ) {
-			formData.append("writer",'${member_id}');
+			formData.append("writer",'${fn:escapeXml(member_id)}');
 		}
 		else {
 			formData.append("writer",$("#writer").val());

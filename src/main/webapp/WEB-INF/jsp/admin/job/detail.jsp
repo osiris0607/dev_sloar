@@ -554,7 +554,7 @@
 				else {
 					str += '<div class="form-check form-check-inline">';
 					str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${fn:escapeXml(code.detail_id)}" >';
-					str += '	<label class="form-check-label">${code.name}</label>';
+					str += '	<label class="form-check-label"><c:out value="${code.name}"></c:out></label>';
 					str += '</div>';
 				}
 			</c:if>
@@ -574,13 +574,13 @@
 			categoryDetail.empty();
     		<c:forEach items="${commonCode}" var="code">
 				<c:if test="${code.master_id == 'M000003'}">
-					if (categoryId == "${code.parent_id}") {
+					if (categoryId == "${fn:escapeXml(code.parent_id)}") {
 						// 맴 처음 나오는 데이터가 Selected이며, Selected된 detail Id로 직종을 찾는다.
 						if (isSelected) {
 							isSelected = false;
-							categoryDetailId = "${code.detail_id}";
+							categoryDetailId = "${fn:escapeXml(code.detail_id)}";
 						}
-						str += '<option value="${code.detail_id}">${code.name}</option>';
+						str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 					}
 				</c:if>
 			</c:forEach>
@@ -592,8 +592,8 @@
 			occupation.empty();
     		<c:forEach items="${commonCode}" var="code">
 				<c:if test="${code.master_id == 'M000004'}">
-					if (categoryDetailId == "${code.parent_id}") {
-						str += '<option value="${code.detail_id}">${code.name}</option>';
+					if (categoryDetailId == "${fn:escapeXml(code.parent_id)}") {
+						str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 					}
 				</c:if>
 			</c:forEach>
@@ -764,7 +764,7 @@
 </script>
   
 <!--페이지 루트-->
-<input type="hidden" id="job_id" name="job_id" value="${vo.job_id}" />
+<input type="hidden" id="job_id" name="job_id" value='<c:out value="${vo.job_id}"/>' />
 <div class="page-nation container">
     <a href="/html/index.html"><i class="nav-icon fa fa-home mr5"></i>홈화면</a><span class="route_icon"></span>
     <a href="/admin/rdt/job/search">일자리</a><span class="route_icon"></span>
@@ -772,7 +772,7 @@
 </div>
 <!--본문시작-->
 <div class="sub-container container">
-	<input type="hidden" id="common_code" name="common_code" value="${commonCode}" />
+	<input type="hidden" id="common_code" name="common_code" value='<c:out value="${commonCode}"/>' />
 	<div class="sub-content">
 		<form name="frm" id="frm">
 			<!--페이지 타이틀-->				

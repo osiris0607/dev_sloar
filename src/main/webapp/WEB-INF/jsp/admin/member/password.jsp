@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <sec:authentication property="principal.username" var="member_id" />
-  
 <script type='text/javascript'>
 	function changePwd() {
 		var form = $("#frm")[0];
@@ -25,7 +25,7 @@
 
 		var base64CurrentPwd = btoa($("#current_pwd").val());
 		var base64newPwd = btoa($("#new_pwd").val());
-		var memberId = "${member_id}";
+		var memberId = "${fn:escapeXml(member_id)}";
 		
 		if (confirm('변경 하시겠습니까?')) {
 			$.ajax({
@@ -75,7 +75,7 @@
                               <tr>							
                                   <th class="w20 jop_write_table_title">아이디</th>
                                   <td class="w80 clearfix">
-                                      <input class="form-control w97" type="text" value="${member_id}" disabled />
+                                      <input class="form-control w97" type="text" value="${fn:escapeXml(member_id)}" disabled />
                                   </td>		
                               </tr>				
                           </table> 

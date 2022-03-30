@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
   
 <script type='text/javascript'>
 	var companyList = new Array(); 
@@ -207,7 +207,7 @@
 		str += '<option value="">--선택--</option>';
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				str += '<option value="' +index + '">${code.name}</option>';
+				str += '<option value="' +index + '"><c:out value="${code.name}"></c:out></option>';
 				index++;
 			</c:if>
 		</c:forEach>
@@ -223,7 +223,7 @@
 		// License Category 별로 License Selector를 만든다.
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000007'}">
-				var licenseId = "${code.detail_id}";
+				var licenseId = "${fn:escapeXml(code.detail_id)}";
 
 				str += '<ul>';
 				// category 에 해당하는 License를 찾는다.
@@ -456,8 +456,8 @@
 			<c:if test="${code.master_id == 'M000006'}">
 				str += '<li>';
 				str += '	<div class="form-check form-check-inline">';
-				str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${code.detail_id}" text="${code.name}" >';
-				str += '		<label class="form-check-label" for="">${code.name}</label>';
+				str += '		<input class="form-check-input" name="specialism" type="checkbox" id="" value="${fn:escapeXml(code.detail_id)}" text="${fn:escapeXml(code.name)}" >';
+				str += '		<label class="form-check-label" for="">${fn:escapeXml(code.name)}</label>';
 				str += '	</div>';
 				str += '</li>';
 			</c:if>
@@ -473,8 +473,8 @@
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000012'}">
 				str += '<div class="form-check form-check-inline">';
-				str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${code.detail_id}" >';
-				str += '		<label class="form-check-label" for="">${code.name}</label>';
+				str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_difficulty" id="" value="${fn:escapeXml(code.detail_id)}" >';
+				str += '		<label class="form-check-label" for="">${fn:escapeXml(code.name)}</label>';
 				str += '</div>';
 			</c:if>
 		</c:forEach>
@@ -489,8 +489,8 @@
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000005'}">
 				str += '<div class="form-check form-check-inline">';
-				str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${code.detail_id}" >';
-				str += '	<label class="form-check-label">${code.name}</label>';
+				str += '	<input class="form-check-input" type="radio" name="inlineRadioOptions_education" id="" value="${fn:escapeXml(code.detail_id)}" >';
+				str += '	<label class="form-check-label">${fn:escapeXml(code.name)}</label>';
 				str += '</div>';
 			</c:if>
 		</c:forEach>
@@ -508,7 +508,7 @@
 		str += '<option value="">직종 선택</option>';
    		<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000004'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>
 		str += '</select>';
@@ -527,13 +527,13 @@
 			str += '<select class="jop_write_table_txt w60 ace-select"  name="selector_category_detail" id="selector_category_detail" title="생태계 세부 분류">';
     		<c:forEach items="${commonCode}" var="code">
 				<c:if test="${code.master_id == 'M000003'}">
-					if (categoryId == "${code.parent_id}") {
+					if (categoryId == "${fn:escapeXml(code.parent_id)}") {
 						// 맴 처음 나오는 데이터가 Selected이며, Selected된 detail Id로 직종을 찾는다.
 						if (isSelected) {
 							isSelected = false;
-							categoryDetailId = "${code.detail_id}";
+							categoryDetailId = "${fn:escapeXml(code.detail_id)}";
 						}
-						str += '<option value="${code.detail_id}">${code.name}</option>';
+						str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 					}
 				</c:if>
 			</c:forEach>
@@ -574,7 +574,7 @@
 </div>
 <!--본문시작-->
 <div class="sub-container container">
-	<input type="hidden" id="common_code" name="common_code" value="${commonCode}" />
+	<input type="hidden" id="common_code" name="common_code" value='<c:out value="${commonCode}"/>' />
 	<div class="sub-content">
 		<form name="frm" id="frm">
 			<!--페이지 타이틀-->				
@@ -605,7 +605,7 @@
                                	<option value="">생태계 분류 전체</option>
                         		<c:forEach items="${commonCode}" var="code">
 									<c:if test="${code.master_id == 'M000002'}">
-										<option value="${code.detail_id}">${code.name}</option>
+										<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>
 									</c:if>
 								</c:forEach>
                                 </select>

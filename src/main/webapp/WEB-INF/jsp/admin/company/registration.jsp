@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
   
 <script type='text/javascript'>
 
@@ -122,7 +122,7 @@
 		str += '<option value="">표준산업분류</option>';
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000015'}">
-				str += '<option value="${code.detail_id}">${code.name}</option>';
+				str += '<option value="${code.detail_id}"><c:out value="${code.name}"></c:out></option>';
 			</c:if>
 		</c:forEach>
 		industryCategory.append(str);
@@ -137,8 +137,8 @@
        	<c:forEach items="${commonCode}" var="code">
 			<c:if test="${code.master_id == 'M000014'}">
 				str += '<div class="form-check form-check-inline">';
-				str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${code.detail_id}"/>';
-				str += '		<label class="form-check-label" >${code.name}</label>';
+				str += '		<input class="form-check-input" type="radio" name="sizeRadioOptions" value="${fn:escapeXml(code.detail_id)}"/>';
+				str += '		<label class="form-check-label" >${fn:escapeXml(code.name)}</label>';
 				str += '</div>';
 			</c:if>
 		</c:forEach>
