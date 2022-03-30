@@ -96,7 +96,7 @@
 </script>
   
 <!--페이지 루트-->
-<input type="hidden" id="faq_id" name="faq_id" value='<c:out value="${faq_id}"/>' />
+<input type="hidden" id="faq_id" name="faq_id" value='<c:out value="${vo.faq_id}"/>' />
 <div class="page-nation container">
 	<a  href="/admin/rdt/home/management"><i class="nav-icon fa fa-home mr5"></i>홈화면</a><span class="route_icon"></span>
 	<a href="/admin/rdt/notification/faq/searchList">알림/정보</a><span class="route_icon"></span>
